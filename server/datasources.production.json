@@ -1,0 +1,7 @@
+{
+    "mongodb": {
+        "url": "mongodb://heroku_sz9cn5j3:h0p8f82h8fkobm4vvkeubl2rr8@ds261570.mlab.com:61570/heroku_sz9cn5j3",
+        "database": "theming",
+        "connector": "mongodb"
+      }    
+}
