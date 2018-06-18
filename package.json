@@ -32,7 +32,8 @@
     "loopback-component-explorer": "^5.0.0",
     "loopback-connector-mongodb": "^1.18.1",
     "serve-favicon": "^2.0.1",
-    "strong-error-handler": "^2.0.0"
+    "strong-error-handler": "^2.0.0",
+    "webpack": "^4.12.0"
   },
   "devDependencies": {
     "ava": "^0.25.0",
