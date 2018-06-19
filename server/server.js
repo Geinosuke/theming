@@ -4,6 +4,8 @@ var loopback = require('loopback');
 var boot = require('loopback-boot');
 
 var app = module.exports = loopback();
+let env = process.env.NODE_ENV;
+const PORT = process.env.PORT;
 
 app.start = function() {
   // start the web server
@@ -11,7 +13,7 @@ app.start = function() {
     app.emit('started');
     var baseUrl = app.get('url').replace(/\/$/, '');
     console.log('Web server listening at: %s', baseUrl);
-    if (app.get('loopback-component-explorer')) {
+    if (app.get('loopback-component-explorer') && env !== 'production') {
       var explorerPath = app.get('loopback-component-explorer').mountPath;
       console.log('Browse your REST API at %s%s', baseUrl, explorerPath);
     }

@@ -5,10 +5,12 @@
   "main": "server/server.js",
   "scripts": {
     "lint": "eslint .",
-    "start": "node .",
+    "start":"npm run start:dev",
+    "start:dev": "cross-env NODE_ENV=development node .",
+    "start:prod": "cross-env NODE_ENV=production node .",
     "posttest": "npm run lint && nsp check",
-    "build": "cd client && cross-env NODE_ENV=production webpack --progress --hide-modules",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build:dev": "cd client && cross-env NODE_ENV=development webpack --progress --hide-modules",
+    "build": "cd client && webpack --progress --hide-modules"
   },
   "repository": {
     "type": "git",
@@ -30,7 +32,8 @@
     "loopback-component-explorer": "^5.0.0",
     "loopback-connector-mongodb": "^1.18.1",
     "serve-favicon": "^2.0.1",
-    "strong-error-handler": "^2.0.0"
+    "strong-error-handler": "^2.0.0",
+    "webpack": "^4.12.0"
   },
   "devDependencies": {
     "ava": "^0.25.0",

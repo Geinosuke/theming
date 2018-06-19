@@ -4,23 +4,12 @@
     <h1>{{ msg }}</h1>
     <h2>Essential Links</h2>
     <ul>
-      <li><a href="https://github.com/Geinosuke/vue-starterkit" target="_blank">Github</a></li>
-      <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li><a href="http://router.vuejs.org/" target="_blank">vue-router</a></li>
-      <li><a href="http://vuex.vuejs.org/" target="_blank">vuex</a></li>
-      <li><a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
+      <li><a href="https://github.com/Geinosuke/theming" target="_blank">Github</a></li>
     </ul>
 
-    <div v-for="test in tests">
+    <div v-for="theme in themes">
       <p>
-        <span><b>{{ test.name }}</b></span><br />
-        <span>{{ test.count }}</span>
+        <span><b>{{ theme.title }}</b></span>
       </p>
     </div>
   </div>
@@ -33,17 +22,21 @@ export default {
   name: 'app',
   data () {
     return {
-      msg: 'Welcome my Vue.js App staterkit',
-      tests: []
+      msg: 'Welcome in ThemingJS',
+      themes: []
     }
   },
   mounted () {
-    this.getTestsfromApi()
+    this.getTheme()
   },
   methods: {
     async getTestsfromApi () {
       const response = await services.getTests();
       this.tests = response.data
+    },
+    async getTheme () {
+      const response = await services.getTheme();
+      this.themes = response.data
     }
   }
 }
