@@ -38,5 +38,9 @@
   "test": {
     "dataSource": "mongodb",
     "public": true
+  },
+  "theme": {
+    "dataSource": "mongodb",
+    "public": true
   }
 }
