@@ -1,43 +1,27 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li><a href="https://github.com/Geinosuke/theming" target="_blank">Github</a></li>
-    </ul>
-
-    <div v-for="theme in themes">
-      <p>
-        <span><b>{{ theme.title }}</b></span>
-      </p>
-    </div>
+    <navbar></navbar>
+    <keep-alive>
+      <router-view></router-view>
+    </keep-alive>
   </div>
 </template>
 
 <script>
 import services from './services/service'
+import Navbar from './components/navbar.vue'
 
 export default {
   name: 'app',
+  components: {Navbar},
   data () {
     return {
-      msg: 'Welcome in ThemingJS',
-      themes: []
+      msg: '',
     }
   },
   mounted () {
-    this.getTheme()
   },
   methods: {
-    async getTestsfromApi () {
-      const response = await services.getTests();
-      this.tests = response.data
-    },
-    async getTheme () {
-      const response = await services.getTheme();
-      this.themes = response.data
-    }
   }
 }
 </script>
@@ -49,7 +33,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 
 h1, h2 {
