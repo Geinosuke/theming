@@ -138,8 +138,8 @@ export default {
       this.isThemeSelected = false;
       this.themeSelected = {};
     },
-    async getGramm () {
-      await services.generateTFIDF();
+    getGramm () {
+      services.generateTFIDF();
       this.$toaster.success("N-Grammes et TF-IDF générés avec succès");
     },
     saveGramm(element){
