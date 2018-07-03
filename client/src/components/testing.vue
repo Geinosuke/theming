@@ -13,17 +13,28 @@
       </div>
     </div>
     <div class="row">
+      <div class="col-md-3 offset-md-2" v-if="isResult">
+        <b-button variant="info" @click="switchShowResult">Montrer tous les resultats</b-button>
+      </div>
       <div class="col-md-3 offset-md-8">
         <b-button variant="success" @click="validate">Valider</b-button>
       </div>
     </div>
-    <div class="row">
+    <div class="row" v-if="isResult">
+      <div class="col-md-8 offset-md-2">
+        <div class="myInline">
+          <h3>Résultat:</h3>
+          <h4><b-badge class="themeBadge" variant="info">{{resultTheme.theme}}</b-badge></h4>
+        </div>
+      </div>
+    </div>
+    <div class="row" v-if="isAllResult">
       <div class="input-group col-md-8 offset-md-2 themeArea">
         <table class="table table-hover">
           <th scope="col" v-for="item in header1">
             {{item}}
           </th>
-          <tr scope="row" v-for="(item, index) in resThemes" @click="handleClick(item)">
+          <tr scope="row" v-for="(item, index) in resThemes">
             <td>{{item.theme}}</td>
             <td>{{item.gramm1}}</td>
             <td>{{item.gramm2}}</td>
@@ -50,19 +61,24 @@ export default {
         "Jaccard 2-gramm",
         "Jaccard 3-gramm"
       ],
-      resThemes: []
+      resThemes: [],
+      isAllResult: false,
+      isResult: false,
+      resultTheme: "test"
     }
   },
   methods: {
-    handleClick(value){
-      console.log(value);
-    },
     async validate() {
       let response = await services.whichTheme({
         text: this.inputText
       })
       this.resThemes = response.data;
-      console.log(this.resThemes)
+      this.isResult = true;
+      console.log(this.resThemes[0]);
+      this.resultTheme = this.resThemes[0];
+    },
+    switchShowResult(){
+      this.isAllResult = !this.isAllResult;
     }
   }
 }
@@ -86,5 +102,11 @@ tr:hover {
     background-color: rgba(230, 225, 225, 0.596);
     cursor: pointer;
 }
+.myInline {
+  display: inline-block;
+}
 
+.themeBadge{
+  margin: 5px;
+}
 </style>
