@@ -72,7 +72,9 @@ module.exports = function(Theme) {
         
         for (let i = 0; i < 3; i++){
             const textsGramms = texts.map(text => {
+                console.log("ici");
                 const textToken = theming.cleanData(text.content, true);
+                console.log(textToken);
                 return theming.getGramm(i + 1, [...textToken.keys()]);
             });
             let corpus = {};
