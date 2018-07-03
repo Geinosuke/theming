@@ -1,18 +1,14 @@
 {
-  "name": "test",
+  "name": "text",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
   },
   "properties": {
-    "name": {
+    "content": {
       "type": "string",
       "required": true
-    },
-    "count": {
-      "type": "number",
-      "default": 0
     }
   },
   "validations": [],

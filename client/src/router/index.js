@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '../components/home.vue'
 import Testing from '../components/testing.vue'
-import Docs from '../components/docs.vue'
+import Manage from '../components/manage.vue'
 import Train from '../components/train.vue'
 import About from '../components/about.vue'
 
@@ -23,18 +23,16 @@ export default new Router({
         path: '/testing',
         name: 'Testing',
         component: Testing
-      }
-      ,
+      },
       {
         path: '/train',
         name: 'Train',
         component: Train
-      }
-      ,
+      },
       {
-        path: '/docs',
-        name: 'Docs',
-        component: Docs
+        path: '/manage',
+        name: 'Manage',
+        component: Manage
       },
       {
         path: '/about',

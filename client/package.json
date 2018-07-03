@@ -17,7 +17,8 @@
     "popper.js": "^1.12.9",
     "v-toaster": "^1.0.3",
     "vue": "^2.5.3",
-    "vue-router": "^3.0.1"
+    "vue-router": "^3.0.1",
+    "vue-spinner": "^1.0.3"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
