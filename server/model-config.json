@@ -35,11 +35,11 @@
     "dataSource": "db",
     "public": false
   },
-  "test": {
+  "theme": {
     "dataSource": "mongodb",
     "public": true
   },
-  "theme": {
+  "text": {
     "dataSource": "mongodb",
     "public": true
   }

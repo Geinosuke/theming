@@ -1,19 +1,27 @@
 {
-    "name": "theme",
-    "base": "PersistedModel",
-    "idInjection": true,
-    "options": {
-      "validateUpsert": true
+  "name": "theme",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "title": {
+      "type": "string",
+      "required": true
     },
-    "properties": {
-      "title": {
-        "type": "string",
-        "required": true
-      }
-    },
-    "validations": [],
-    "relations": {},
-    "acls": [],
-    "methods": {}
-  }
-  
+    "data": {
+      "type": "array"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "texts": {
+      "type": "hasMany",
+      "model": "text",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}
