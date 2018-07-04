@@ -75,7 +75,7 @@ export default {
       this.resThemes = response.data.sort((a, b) => {
         const resA = a.gramm1 + a.gramm2 + a.gramm3;
         const resB = b.gramm1 + b.gramm2 + b.gramm3;
-        return (resA < resB) ? -1 : 1;
+        return (resA > resB) ? -1 : 1;
       });
       this.isResult = true;
       this.resultTheme = this.resThemes[0];
