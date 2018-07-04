@@ -10,6 +10,6 @@ else
   usedUrl = devApi;
 export default() => {
   return axios.create({
-    baseURL: usedUrl
+    baseURL: "api"
   })
 }
