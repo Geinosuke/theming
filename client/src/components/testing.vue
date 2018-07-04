@@ -72,9 +72,12 @@ export default {
       let response = await services.whichTheme({
         text: this.inputText
       })
-      this.resThemes = response.data;
+      this.resThemes = response.data.sort((a, b) => {
+        const resA = a.gramm1 + a.gramm2 + a.gramm3;
+        const resB = b.gramm1 + b.gramm2 + b.gramm3;
+        return (resA < resB) ? -1 : 1;
+      });
       this.isResult = true;
-      console.log(this.resThemes[0]);
       this.resultTheme = this.resThemes[0];
     },
     switchShowResult(){
