@@ -1,8 +1,8 @@
 'use strict';
 // Npm depedencies
-const theming = require('themingjs');
+const {cleanData, getGramm, getJaccard, getTFIDF, splitStringInput} = require('themingjs');
 const is = require('@sindresorhus/is');
-const _ = require('lodash');
+const { countBy } = require('lodash');
 
 module.exports = function(Theme) {
      // Detect theme input text. Should be http - get
@@ -15,7 +15,7 @@ module.exports = function(Theme) {
                 theme: theme.title
             };
             for (let i = 0; i < 3; i++){
-                const testInput = _.countBy(theming.getGramm(i + 1, [...theming.cleanData(text, true).keys()]));
+                const testInput = countBy(getGramm(i + 1, cleanData(splitStringInput(text), true)));
                 theme.data.forEach(item => {
                     if(item.kgramm === i + 1){
                         Reflect.set(currTheme, `gramm${i+1}`, getJaccard(testInput, item.corpus));
@@ -52,10 +52,7 @@ module.exports = function(Theme) {
    // Generate kgramms and tfidf for all theme then for selected theme
     Theme.generateTFIDF = async function (){
         const themes = await Theme.find();
-        let promises = [];
-        themes.forEach(theme => {
-            promises.push(theme.generateTFIDF());
-        })
+        const promises = themes.map(theme => theme.generateTFIDF());
         await Promise.all(promises);
         return {
             status: "ok"
@@ -72,8 +69,8 @@ module.exports = function(Theme) {
         
         for (let i = 0; i < 3; i++){
             const textsGramms = texts.map(text => {
-                const textToken = theming.cleanData(text.content, true);
-                return theming.getGramm(i + 1, [...textToken.keys()]);
+                const textToken = cleanData(splitStringInput(text.content), true);
+                return getGramm(i + 1, textToken); 
             });
             let corpus = {};
             textsGramms.forEach(gramms => {
@@ -146,11 +143,11 @@ module.exports = function(Theme) {
             throw new Error("Input should be a string"); // check how to make custom error response
         if (!is.boolean(isNoise))
             throw new Error("isNoise should be a boolean");
-        const cleanedHistoInput = theming.cleanData(input, isNoise);
+        const cleanedHistoInput = cleanData(input, isNoise);
         let newDataArray = [];
         let oldDataArray = this.data;
         for (let i = 0; i < 3; i++){ // Default 3-gramms !!!
-            const grammsObject = _.countBy(theming.getGramm(i + 1, [...cleanedHistoInput.keys()]));
+            const grammsObject = countBy(getGramm(i + 1, [...cleanedHistoInput.keys()]));
             newDataArray.push({
                 kgramm: i + 1,
                 total: Object.keys(grammsObject).length,
@@ -184,11 +181,11 @@ module.exports = function(Theme) {
     if (!is.boolean(isNoise)){
         throw new Error("isNoise should be a boolean");
     }
-    const cleanedHistoInput = theming.cleanData(input, isNoise);
+    const cleanedHistoInput = cleanData(input, isNoise);
     let newDataArray = [];
     let oldDataArray = themeObject.data;
     for (let i = 0; i < 3; i++){ // Default 3-gramms !!! should be able to handle more gramms
-        const grammsObject = _.countBy(theming.getGramm(i + 1, [...cleanedHistoInput.keys()]));
+        const grammsObject = countBy(getGramm(i + 1, [...cleanedHistoInput.keys()]));
         newDataArray.push({
             kgramm: i + 1,
             total: Object.keys(grammsObject).length,
@@ -214,7 +211,7 @@ module.exports = function(Theme) {
               if (elFirst.kgramm === elSecond.kgramm){
                   tmp.push(...getElement(elFirst.dataWithCount));
                   tmp.push(...getElement(elSecond.dataWithCount));
-                  const grammsObject = _.countBy(tmp);
+                  const grammsObject = countBy(tmp);
                   res.push({
                     kgramm: elFirst.kgramm,
                     total: Object.keys(grammsObject).length,
